@@ -384,6 +384,64 @@
             color: #cbd5e1;
         }
 
+        /* ── DOWNLOAD BAR ── */
+        .download-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--primary);
+            padding: 14px 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 14px;
+            z-index: 1000;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+        }
+
+        .download-bar span {
+            color: #cbd5e1;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-download.en {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-download.es {
+            background: transparent;
+            color: white;
+            border: 1.5px solid var(--accent);
+        }
+
+        .btn-download:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(233,69,96,0.3);
+        }
+
+        .btn-download:disabled {
+            opacity: 0.6;
+            cursor: wait;
+            transform: none;
+        }
+
         /* ── PRINT ── */
         @media print {
             body { font-size: 13px; }
@@ -391,6 +449,7 @@
             .header { padding: 35px 40px 30px; }
             .content { padding: 25px 30px 25px 40px; }
             .sidebar { padding: 25px 20px; }
+            .download-bar { display: none !important; }
         }
     </style>
 </head>
@@ -738,5 +797,203 @@
             </aside>
         </div>
     </div>
+
+    <!-- DOWNLOAD BAR -->
+    <div class="download-bar">
+        <span>Download CV:</span>
+        <button class="btn-download en" onclick="downloadPDF('en')">&#11015; English</button>
+        <button class="btn-download es" onclick="downloadPDF('es')">&#11015; Español</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
+    <script>
+        const translations = {
+            es: {
+                title: 'Desarrolladora de Software Java',
+                location: 'España \u00B7 Remoto',
+                aboutTitle: 'Sobre M\u00ED',
+                aboutText: 'Desarrolladora de software orientada a resultados con <strong>m\u00E1s de 5 a\u00F1os de experiencia</strong> en <strong>desarrollo Back-End</strong> con <strong>Java, Spring Boot</strong> y <strong>arquitectura de microservicios</strong>. Especializada en la creaci\u00F3n de <strong>APIs RESTful</strong> escalables y seguras, aplicando <strong>principios SOLID</strong>, <strong>Design Patterns</strong> y pr\u00E1cticas de c\u00F3digo limpio. Experiencia en todo el ciclo de desarrollo en entornos <strong>Agile/Scrum</strong>, aplicando metodolog\u00EDas <strong>TDD</strong> y pipelines <strong>CI/CD</strong>. Experiencia pr\u00E1ctica con contenedores <strong>Docker</strong>, despliegues en <strong>AWS</strong> y <strong>OpenShift</strong>, y frameworks ORM como <strong>Hibernate/JPA</strong>. Competente en el uso de <strong>herramientas de desarrollo con IA</strong> para acelerar el an\u00E1lisis de c\u00F3digo, depuraci\u00F3n y entrega.',
+                expTitle: 'Experiencia Profesional',
+                skillsTitle: 'Habilidades T\u00E9cnicas',
+                langTitle: 'Idiomas',
+                methTitle: 'Metodolog\u00EDa',
+                aiTitle: 'Desarrollo con IA',
+                aiText: 'Experiencia en el uso de herramientas de IA (Claude, Copilot) para an\u00E1lisis de c\u00F3digo, depuraci\u00F3n, refactorizaci\u00F3n y aceleraci\u00F3n de flujos de desarrollo.',
+                catLang: 'Lenguajes',
+                catFrameworks: 'Frameworks',
+                catArch: 'Arquitectura',
+                catDb: 'Bases de Datos',
+                catMsg: 'Mensajer\u00EDa',
+                catDevops: 'DevOps & Cloud',
+                catTest: 'Testing y Calidad',
+                catTools: 'Herramientas',
+                langPortuguese: 'Portugu\u00E9s',
+                langSpanish: 'Espa\u00F1ol',
+                langEnglish: 'Ingl\u00E9s',
+                langNative: 'Nativo',
+                langFluent: 'Fluido',
+                langProf: 'Profesional',
+                methItems: ['Agile / SCRUM', 'Clean Code / SOLID', 'Design Patterns', 'TDD', 'Dise\u00F1o API-First', 'Revisi\u00F3n de c\u00F3digo'],
+                exp: [
+                    {
+                        role: 'Desarrolladora de Software Java',
+                        meta: 'Dic 2025 \u2013 Presente \u00B7 Remoto',
+                        desc: 'Desarrollo y mantenimiento del microservicio de Gesti\u00F3n de Informaci\u00F3n para una plataforma global de seguros de cr\u00E9dito, gestionando el procesamiento de informes de m\u00FAltiples proveedores e integraciones de datos externos.',
+                        items: [
+                            'Construcci\u00F3n de APIs REST reactivas con <strong>Spring WebFlux</strong> y <strong>Project Reactor</strong> para procesamiento no bloqueante y de alto rendimiento en m\u00FAltiples bases de datos.',
+                            'Implementaci\u00F3n de motor de renderizado de informes basado en XSLT para m\u00FAltiples proveedores, incluyendo parsing XML/JSON, manejo de encoding y transformaciones complejas.',
+                            'Desarrollo de arquitectura multi-datasource con <strong>QueryDSL</strong> para consultas type-safe y <strong>MapStruct</strong> para mapeo autom\u00E1tico de DTOs.',
+                            'Enriquecimiento de respuestas API con integraciones de servicios externos utilizando <strong>Spring Cache</strong> para optimizaci\u00F3n de rendimiento.',
+                            'Aplicaci\u00F3n de <strong>generaci\u00F3n de c\u00F3digo OpenAPI</strong> para desarrollo API-first y mantenimiento de dise\u00F1o basado en contratos.',
+                            'Resoluci\u00F3n de vulnerabilidades en dependencias (remediaci\u00F3n CVE) y cumplimiento de est\u00E1ndares de seguridad en el pipeline.'
+                        ]
+                    },
+                    {
+                        role: 'Ingeniera de Software',
+                        meta: 'Ene 2021 \u2013 Dic 2025 \u00B7 Tallin, Estonia \u00B7 Remoto',
+                        desc: 'Dise\u00F1o e implementaci\u00F3n de soluciones backend orientadas a microservicios con Java y Spring Boot, integrando bases de datos relacionales y servicios cloud en AWS.',
+                        items: [
+                            'Desarrollo de <strong>APIs RESTful</strong> robustas y escalables integradas con <strong>PostgreSQL</strong> y <strong>MySQL</strong>, desplegadas en <strong>AWS</strong> (ECS, Lambda, RDS, S3, API Gateway).',
+                            'Integraci\u00F3n de fuentes de datos externas mediante APIs, procesamiento de archivos y sistemas de mensajer\u00EDa (<strong>Apache Kafka</strong>, <strong>AWS SQS/SNS</strong>).',
+                            'Implementaci\u00F3n de estrategias de pruebas automatizadas con <strong>JUnit</strong> y <strong>Mockito</strong> para pruebas unitarias, de regresi\u00F3n e integraci\u00F3n.'
+                        ]
+                    },
+                    {
+                        role: 'Desarrolladora de Software',
+                        meta: 'Ago 2022 \u2013 Dic 2025 \u00B7 Espa\u00F1a \u00B7 Remoto',
+                        desc: 'Desarrollo de una plataforma de infraestructura hidr\u00E1ulica para equilibrar la demanda de agua con los requisitos de caudal ecol\u00F3gico, utilizando arquitectura de microservicios.',
+                        items: [
+                            'Construcci\u00F3n de m\u00F3dulos para gesti\u00F3n h\u00EDdrica, seguridad, gesti\u00F3n documental y comunicaci\u00F3n backend-frontend.',
+                            'Desarrollo de nuevas funcionalidades, mantenimiento de servicios existentes y optimizaci\u00F3n de procesos de desarrollo.',
+                            'Implementaci\u00F3n de estrategias de pruebas unitarias y de integraci\u00F3n para garantizar la fiabilidad del c\u00F3digo.'
+                        ]
+                    },
+                    {
+                        role: 'Ingeniera de Software',
+                        meta: 'Sep 2024 \u2013 Nov 2024 \u00B7 Contrato',
+                        desc: null,
+                        items: [
+                            'Migraci\u00F3n de APIs del sector bancario de <strong>MULE</strong> a arquitectura de microservicios con <strong>Spring Boot</strong>.',
+                            'An\u00E1lisis de l\u00F3gica de negocio para desarrollar un nuevo componente GLUON, asegurando <strong>cobertura de pruebas superior al 80%</strong> con JUnit.',
+                            'Cumplimiento de est\u00E1ndares de calidad y seguridad con <strong>SonarQube</strong> y <strong>Fortify</strong>. Despliegue en m\u00FAltiples entornos con <strong>OpenShift</strong>.'
+                        ]
+                    },
+                    {
+                        role: 'Programadora de Software',
+                        meta: 'Jul 2021 \u2013 Ago 2022 \u00B7 Espa\u00F1a',
+                        desc: null,
+                        items: [
+                            'Desarrollo de <strong>HORUS</strong>, plataforma de orquestaci\u00F3n de seguridad para centros SOC, generando inteligencia cibern\u00E9tica.',
+                            'Integraci\u00F3n de <strong>Keycloak</strong> para gesti\u00F3n de usuarios y documentaci\u00F3n de APIs con <strong>Swagger</strong>.',
+                            'Construcci\u00F3n de m\u00F3dulos de procesamiento de datos de alto volumen con capacidades de filtrado avanzado.'
+                        ]
+                    },
+                    {
+                        role: 'Desarrolladora de Software Junior',
+                        meta: 'Feb 2021 \u2013 Jul 2021 \u00B7 Remoto',
+                        desc: null,
+                        items: [
+                            'Dise\u00F1o y construcci\u00F3n de la <strong>arquitectura MVP</strong> para herramienta de evaluaci\u00F3n de riesgo humano en ciberseguridad.',
+                            'Cobertura m\u00EDnima del 80% en pruebas unitarias con JUnit. Trabajo en <strong>Agile/SCRUM</strong> con colaboraci\u00F3n directa con clientes.'
+                        ]
+                    }
+                ]
+            }
+        };
+
+        function downloadPDF(lang) {
+            const btn = document.querySelector(`.btn-download.${lang}`);
+            btn.disabled = true;
+            btn.textContent = 'Generating...';
+
+            const bar = document.querySelector('.download-bar');
+            bar.style.display = 'none';
+
+            const page = document.querySelector('.page');
+            let backup = null;
+
+            if (lang === 'es') {
+                backup = page.innerHTML;
+                applyTranslations(page, translations.es);
+            }
+
+            const opt = {
+                margin: 0,
+                filename: lang === 'es' ? 'Elizama_Venancio_CV_ES.pdf' : 'Elizama_Venancio_CV_EN.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+            };
+
+            html2pdf().set(opt).from(page).save().then(function() {
+                if (backup) page.innerHTML = backup;
+                bar.style.display = 'flex';
+                btn.disabled = false;
+                btn.innerHTML = lang === 'es' ? '\u2B07 Espa\u00F1ol' : '\u2B07 English';
+            });
+        }
+
+        function applyTranslations(page, t) {
+            // Header
+            page.querySelector('.title').textContent = t.title;
+            const contactSpans = page.querySelectorAll('.contact-item span:not(.icon)');
+            contactSpans.forEach(function(span) {
+                if (span.textContent.includes('Spain')) span.innerHTML = t.location;
+            });
+
+            // About
+            const sectionTitles = page.querySelectorAll('.section-title');
+            sectionTitles[0].textContent = t.aboutTitle;
+            sectionTitles[1].textContent = t.expTitle;
+            page.querySelector('.about p').innerHTML = t.aboutText;
+
+            // Experience
+            const expItems = page.querySelectorAll('.exp-item');
+            t.exp.forEach(function(expData, i) {
+                const item = expItems[i];
+                if (!item) return;
+                item.querySelector('.exp-role').textContent = expData.role;
+                item.querySelector('.exp-meta').innerHTML = expData.meta;
+                const descEl = item.querySelector('.exp-desc');
+                if (descEl && expData.desc) descEl.textContent = expData.desc;
+                else if (descEl && !expData.desc) descEl.remove();
+                const lis = item.querySelectorAll('.exp-list li');
+                expData.items.forEach(function(text, j) {
+                    if (lis[j]) lis[j].innerHTML = text;
+                });
+            });
+
+            // Sidebar titles
+            const sidebarTitles = page.querySelectorAll('.sidebar-title');
+            sidebarTitles[0].textContent = t.skillsTitle;
+            sidebarTitles[1].textContent = t.langTitle;
+            sidebarTitles[2].textContent = t.methTitle;
+
+            // Skill categories
+            const catTitles = page.querySelectorAll('.skill-category-title');
+            var catMap = [t.catLang, t.catFrameworks, t.catArch, t.catDb, t.catMsg, t.catDevops, t.catTest, t.catTools];
+            catTitles.forEach(function(el, i) { if (catMap[i]) el.textContent = catMap[i]; });
+
+            // Languages section
+            const langNames = page.querySelectorAll('.lang-name');
+            const langLevels = page.querySelectorAll('.lang-level');
+            langNames[0].textContent = t.langPortuguese;
+            langNames[1].textContent = t.langSpanish;
+            langNames[2].textContent = t.langEnglish;
+            langLevels[0].textContent = t.langNative;
+            langLevels[1].textContent = t.langFluent;
+            langLevels[2].textContent = t.langProf;
+
+            // Methodology
+            const methSection = page.querySelectorAll('.sidebar-section')[3];
+            const methLis = methSection.querySelectorAll('.skill-list li');
+            t.methItems.forEach(function(text, i) { if (methLis[i]) methLis[i].textContent = text; });
+
+            // AI Badge
+            page.querySelector('.ai-badge-title').textContent = t.aiTitle;
+            page.querySelector('.ai-badge p').textContent = t.aiText;
+        }
+    </script>
 </body>
 </html>
