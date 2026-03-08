@@ -444,12 +444,71 @@
 
         /* ── PRINT ── */
         @media print {
-            body { font-size: 13px; }
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            body { font-size: 11.5px; margin: 0; }
             .page { max-width: none; box-shadow: none; }
-            .header { padding: 35px 40px 30px; }
-            .content { padding: 25px 30px 25px 40px; }
-            .sidebar { padding: 25px 20px; }
             .download-bar { display: none !important; }
+
+            .header { padding: 28px 35px 22px; }
+            .header h1 { font-size: 26px; }
+            .header .title { font-size: 12px; margin-bottom: 12px; }
+            .contact-row { font-size: 10.5px; gap: 18px; }
+
+            .main {
+                display: grid;
+                grid-template-columns: 1fr 175px;
+            }
+            .content { padding: 18px 25px 18px 35px; }
+            .sidebar { padding: 18px 16px; }
+
+            .section-title {
+                font-size: 11.5px;
+                letter-spacing: 2px;
+                margin-bottom: 10px;
+                padding-bottom: 5px;
+            }
+            .sidebar-title {
+                font-size: 9px;
+                margin-bottom: 8px;
+                padding-bottom: 4px;
+            }
+
+            .about { margin-bottom: 14px; }
+            .about p { font-size: 10.5px; line-height: 1.55; }
+
+            .exp-item {
+                margin-bottom: 12px;
+                padding-left: 12px;
+            }
+            .exp-item::before { width: 7px; height: 7px; left: -4.5px; top: 4px; }
+            .exp-role { font-size: 11.5px; }
+            .exp-company { font-size: 10.5px; }
+            .exp-meta { font-size: 9px; margin-bottom: 3px; }
+            .exp-desc { font-size: 10px; line-height: 1.5; margin-bottom: 4px; }
+            .exp-list li { font-size: 9.5px; padding-left: 10px; margin-bottom: 1.5px; line-height: 1.45; }
+            .exp-list li::before { width: 3px; height: 3px; top: 5.5px; }
+
+            .tags { gap: 3px; margin-top: 4px; }
+            .tag { font-size: 8px; padding: 1px 5px; }
+
+            .skill-category { margin-bottom: 8px; }
+            .skill-category-title { font-size: 8px; margin-bottom: 3px; }
+            .skill-list li { font-size: 9.5px; padding: 1px 0; gap: 4px; }
+            .skill-list li::before { width: 4px; height: 4px; }
+
+            .sidebar-section { margin-bottom: 14px; }
+
+            .lang-item { font-size: 9.5px; padding: 2px 0; }
+            .lang-level { font-size: 8px; }
+            .lang-bar { height: 2px; margin-top: 1px; margin-bottom: 5px; }
+            .lang-name { font-size: 9.5px; }
+
+            .ai-badge { padding: 7px 9px; }
+            .ai-badge-title { font-size: 8px; margin-bottom: 4px; }
+            .ai-badge p { font-size: 8.5px; line-height: 1.4; }
+
+            .exp-item { page-break-inside: avoid; }
+            .sidebar-section { page-break-inside: avoid; }
         }
     </style>
 </head>
@@ -801,11 +860,10 @@
     <!-- DOWNLOAD BAR -->
     <div class="download-bar">
         <span>Download CV:</span>
-        <button class="btn-download en" onclick="downloadPDF('en')">&#11015; English</button>
-        <button class="btn-download es" onclick="downloadPDF('es')">&#11015; Español</button>
+        <button class="btn-download en" onclick="downloadPDF('en')">&#128196; Save PDF &ndash; English</button>
+        <button class="btn-download es" onclick="downloadPDF('es')">&#128196; Save PDF &ndash; Español</button>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
     <script>
         const translations = {
             es: {
@@ -902,13 +960,6 @@
         };
 
         function downloadPDF(lang) {
-            const btn = document.querySelector(`.btn-download.${lang}`);
-            btn.disabled = true;
-            btn.textContent = 'Generating...';
-
-            const bar = document.querySelector('.download-bar');
-            bar.style.display = 'none';
-
             const page = document.querySelector('.page');
             let backup = null;
 
@@ -917,21 +968,12 @@
                 applyTranslations(page, translations.es);
             }
 
-            const opt = {
-                margin: 0,
-                filename: lang === 'es' ? 'Elizama_Venancio_CV_ES.pdf' : 'Elizama_Venancio_CV_EN.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true, letterRendering: true },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-                pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+            window.onafterprint = function() {
+                if (backup) page.innerHTML = backup;
+                window.onafterprint = null;
             };
 
-            html2pdf().set(opt).from(page).save().then(function() {
-                if (backup) page.innerHTML = backup;
-                bar.style.display = 'flex';
-                btn.disabled = false;
-                btn.innerHTML = lang === 'es' ? '\u2B07 Espa\u00F1ol' : '\u2B07 English';
-            });
+            window.print();
         }
 
         function applyTranslations(page, t) {
