@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elizama Venancio - Java Software Developer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+        :root {
+            --primary: #1a1a2e;
+            --accent: #e94560;
+            --accent-light: #fff0f3;
+            --secondary: #16213e;
+            --text: #2d2d2d;
+            --text-light: #6b7280;
+            --bg: #ffffff;
+            --bg-alt: #f8f9fc;
+            --border: #e5e7eb;
+            --tag-bg: #f0f4ff;
+            --tag-text: #3b5998;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            font-size: 13.5px;
+            line-height: 1.6;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        @page {
+            margin: 0;
+            size: A4;
+        }
+
+        .page {
+            max-width: 210mm;
+            margin: 0 auto;
+            background: var(--bg);
+        }
+
+        /* ── HEADER ── */
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 40px 45px 35px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            right: -60px;
+            top: -60px;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: var(--accent);
+            opacity: 0.08;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            right: 80px;
+            bottom: -40px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: var(--accent);
+            opacity: 0.05;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            margin-bottom: 4px;
+        }
+
+        .header .title {
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--accent);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        .contact-row {
+            display: flex;
+            gap: 28px;
+            flex-wrap: wrap;
+            font-size: 12.5px;
+            color: #cbd5e1;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .contact-item .icon {
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+        }
+
+        .contact-item a {
+            color: #cbd5e1;
+            text-decoration: none;
+        }
+
+        /* ── MAIN LAYOUT ── */
+        .main {
+            display: grid;
+            grid-template-columns: 1fr 200px;
+            gap: 0;
+        }
+
+        .content {
+            padding: 30px 35px 30px 45px;
+        }
+
+        .sidebar {
+            background: var(--bg-alt);
+            padding: 30px 25px;
+            border-left: 1px solid var(--border);
+        }
+
+        /* ── SECTION TITLES ── */
+        .section-title {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: var(--primary);
+            margin-bottom: 18px;
+            padding-bottom: 8px;
+            border-bottom: 2.5px solid var(--accent);
+            display: inline-block;
+        }
+
+        .sidebar-title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary);
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+
+        /* ── ABOUT ── */
+        .about {
+            margin-bottom: 28px;
+        }
+
+        .about p {
+            color: var(--text);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .about strong {
+            color: var(--primary);
+        }
+
+        /* ── EXPERIENCE ── */
+        .experience {
+            margin-bottom: 8px;
+        }
+
+        .exp-item {
+            margin-bottom: 20px;
+            padding-left: 18px;
+            border-left: 2px solid var(--border);
+            position: relative;
+        }
+
+        .exp-item::before {
+            content: '';
+            position: absolute;
+            left: -5.5px;
+            top: 5px;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .exp-item.current::before {
+            box-shadow: 0 0 0 3px var(--accent-light);
+        }
+
+        .exp-header {
+            margin-bottom: 6px;
+        }
+
+        .exp-role {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .exp-company {
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .exp-meta {
+            font-size: 11px;
+            color: var(--text-light);
+            margin-bottom: 6px;
+        }
+
+        .exp-desc {
+            font-size: 12.5px;
+            color: var(--text);
+            line-height: 1.6;
+            margin-bottom: 6px;
+        }
+
+        .exp-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .exp-list li {
+            font-size: 12px;
+            color: var(--text);
+            padding-left: 14px;
+            position: relative;
+            margin-bottom: 3px;
+            line-height: 1.55;
+        }
+
+        .exp-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 7px;
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        /* ── TECH TAGS ── */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 6px;
+        }
+
+        .tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            font-weight: 500;
+            background: var(--tag-bg);
+            color: var(--tag-text);
+            padding: 2px 8px;
+            border-radius: 3px;
+            white-space: nowrap;
+        }
+
+        .tag.highlight {
+            background: var(--accent-light);
+            color: var(--accent);
+        }
+
+        /* ── SIDEBAR ITEMS ── */
+        .sidebar-section {
+            margin-bottom: 24px;
+        }
+
+        .skill-category {
+            margin-bottom: 14px;
+        }
+
+        .skill-category-title {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-light);
+            margin-bottom: 6px;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            font-size: 11.5px;
+            color: var(--text);
+            padding: 2px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .skill-list li::before {
+            content: '';
+            width: 5px;
+            height: 5px;
+            background: var(--accent);
+            border-radius: 1px;
+            flex-shrink: 0;
+        }
+
+        /* ── LANGUAGES ── */
+        .lang-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4px 0;
+            font-size: 11.5px;
+        }
+
+        .lang-name {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .lang-level {
+            font-size: 10px;
+            color: var(--text-light);
+        }
+
+        .lang-bar {
+            height: 3px;
+            background: var(--border);
+            border-radius: 2px;
+            margin-top: 2px;
+            margin-bottom: 8px;
+        }
+
+        .lang-bar-fill {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        /* ── AI BADGE ── */
+        .ai-badge {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 10px 12px;
+            border-radius: 6px;
+            margin-top: 4px;
+        }
+
+        .ai-badge-title {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 6px;
+            color: var(--accent);
+        }
+
+        .ai-badge p {
+            font-size: 10.5px;
+            line-height: 1.5;
+            color: #cbd5e1;
+        }
+
+        /* ── PRINT ── */
+        @media print {
+            body { font-size: 13px; }
+            .page { max-width: none; box-shadow: none; }
+            .header { padding: 35px 40px 30px; }
+            .content { padding: 25px 30px 25px 40px; }
+            .sidebar { padding: 25px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- HEADER -->
+        <header class="header">
+            <h1>ELIZAMA VENANCIO</h1>
+            <div class="title">Java Software Developer</div>
+            <div class="contact-row">
+                <div class="contact-item">
+                    <span class="icon">&#9742;</span>
+                    <span>+34 622 391 882</span>
+                </div>
+                <div class="contact-item">
+                    <span class="icon">&#9993;</span>
+                    <a href="mailto:eliizamello@gmail.com">eliizamello@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <span class="icon">&#9679;</span>
+                    <span>Spain &middot; Remote</span>
+                </div>
+                <div class="contact-item">
+                    <span class="icon">in</span>
+                    <a href="https://www.linkedin.com/in/elizamamelo/">linkedin.com/in/elizamamelo</a>
+                </div>
+            </div>
+        </header>
+
+        <div class="main">
+            <!-- LEFT: CONTENT -->
+            <div class="content">
+
+                <!-- ABOUT -->
+                <section class="about">
+                    <div class="section-title">About Me</div>
+                    <p>
+                        Results-oriented software developer with <strong>5+ years of experience</strong> in
+                        <strong>Back-End development</strong> using <strong>Java, Spring Boot</strong> and
+                        <strong>microservices architecture</strong>. Specialized in building scalable, secure
+                        <strong>RESTful APIs</strong> with a strong focus on clean code, performance optimization
+                        and component reusability. Experienced across the full development lifecycle in
+                        <strong>Agile/Scrum</strong> environments, with hands-on expertise in CI/CD pipelines,
+                        containerization with <strong>Docker</strong> and
+                        cloud deployments on <strong>AWS</strong> and <strong>OpenShift</strong>.
+                        Proficient in leveraging <strong>AI-powered development tools</strong> to accelerate
+                        code analysis, debugging, and delivery.
+                    </p>
+                </section>
+
+                <!-- EXPERIENCE -->
+                <section class="experience">
+                    <div class="section-title">Professional Experience</div>
+
+                    <!-- ATRADIUS -->
+                    <div class="exp-item current">
+                        <div class="exp-header">
+                            <div class="exp-role">Java Software Developer</div>
+                            <div class="exp-company">Atradius</div>
+                            <div class="exp-meta">Dec 2025 &ndash; Present &middot; Remote</div>
+                        </div>
+                        <div class="exp-desc">
+                            Development and maintenance of the Information Management microservice for a
+                            global credit insurance platform, handling multi-provider buyer report
+                            processing and external data integrations.
+                        </div>
+                        <ul class="exp-list">
+                            <li>Built reactive REST APIs using <strong>Spring WebFlux</strong> and <strong>Project Reactor</strong> for non-blocking, high-throughput data processing across multiple databases.</li>
+                            <li>Implemented XSLT-based report rendering engine supporting multiple providers, including XML/JSON parsing, encoding handling and complex transformations.</li>
+                            <li>Developed multi-datasource architecture with <strong>QueryDSL</strong> for type-safe queries and <strong>MapStruct</strong> for automated DTO mapping.</li>
+                            <li>Enriched API responses with external service integrations (CGRefCode API) using <strong>Spring Cache</strong> for performance optimization.</li>
+                            <li>Applied <strong>OpenAPI code generation</strong> for API-first development and maintained contract-driven design.</li>
+                            <li>Resolved dependency vulnerabilities (CVE remediation) and ensured pipeline compliance with security standards.</li>
+                        </ul>
+                        <div class="tags">
+                            <span class="tag">Java 21</span>
+                            <span class="tag">Spring WebFlux</span>
+                            <span class="tag">Reactor</span>
+                            <span class="tag">QueryDSL</span>
+                            <span class="tag">MapStruct</span>
+                            <span class="tag">XSLT</span>
+                            <span class="tag">OpenAPI</span>
+                            <span class="tag">Maven</span>
+                            <span class="tag">Oracle</span>
+                            <span class="tag">Lombok</span>
+                        </div>
+                    </div>
+
+                    <!-- .BUILDER -->
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <div class="exp-role">Software Engineer</div>
+                            <div class="exp-company">.Builder</div>
+                            <div class="exp-meta">Jan 2021 &ndash; Dec 2025 &middot; Tallinn, Estonia &middot; Remote</div>
+                        </div>
+                        <div class="exp-desc">
+                            Designed and implemented backend microservices solutions with Java and Spring Boot,
+                            integrating relational databases and cloud-native services on AWS.
+                        </div>
+                        <ul class="exp-list">
+                            <li>Developed robust and scalable <strong>RESTful APIs</strong> integrated with <strong>PostgreSQL</strong> and <strong>MySQL</strong>, deployed on <strong>AWS</strong> (ECS, Lambda, RDS, S3, API Gateway).</li>
+                            <li>Integrated external data sources via APIs, file processing, and messaging systems (<strong>Apache Kafka</strong>, <strong>AWS SQS/SNS</strong>).</li>
+                            <li>Implemented automated testing strategies with <strong>JUnit</strong> and <strong>Mockito</strong> for unit, regression, and integration testing.</li>
+                        </ul>
+                        <div class="tags">
+                            <span class="tag">Java</span>
+                            <span class="tag">Spring Boot</span>
+                            <span class="tag">AWS</span>
+                            <span class="tag">Kafka</span>
+                            <span class="tag">PostgreSQL</span>
+                            <span class="tag">JUnit</span>
+                            <span class="tag">Mockito</span>
+                        </div>
+                    </div>
+
+                    <!-- AYESA -->
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <div class="exp-role">Software Developer</div>
+                            <div class="exp-company">AYESA Advanced Technologies</div>
+                            <div class="exp-meta">Aug 2022 &ndash; Dec 2025 &middot; Spain &middot; Remote</div>
+                        </div>
+                        <div class="exp-desc">
+                            Development of a hydraulic infrastructure platform to balance water demand with
+                            ecological flow requirements, using a microservices-based architecture.
+                        </div>
+                        <ul class="exp-list">
+                            <li>Built modules for water management, security, document management, and backend-to-frontend communication.</li>
+                            <li>Developed new features, maintained existing services, and optimized development processes for on-time delivery.</li>
+                            <li>Implemented unit and integration testing strategies to ensure code reliability.</li>
+                        </ul>
+                        <div class="tags">
+                            <span class="tag">Java 1.8</span>
+                            <span class="tag">Spring (Boot, Security, Data)</span>
+                            <span class="tag">Oracle</span>
+                            <span class="tag">REST</span>
+                            <span class="tag">Docker</span>
+                        </div>
+                    </div>
+
+                    <!-- UST -->
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <div class="exp-role">Software Engineer</div>
+                            <div class="exp-company">UST &ndash; Santander</div>
+                            <div class="exp-meta">Sep 2024 &ndash; Nov 2024 &middot; Contract</div>
+                        </div>
+                        <ul class="exp-list">
+                            <li>Migrated banking sector APIs from <strong>MULE</strong> to <strong>Spring Boot</strong> microservices architecture.</li>
+                            <li>Analyzed business logic to develop a new GLUON component, ensuring <strong>80%+ test coverage</strong> with JUnit.</li>
+                            <li>Met quality and security standards with <strong>SonarQube</strong> and <strong>Fortify</strong>. Deployed across environments using <strong>OpenShift</strong>.</li>
+                        </ul>
+                        <div class="tags">
+                            <span class="tag">Spring Boot</span>
+                            <span class="tag">JUnit</span>
+                            <span class="tag">SonarQube</span>
+                            <span class="tag">Fortify</span>
+                            <span class="tag">OpenShift</span>
+                        </div>
+                    </div>
+
+                    <!-- ENTELGY -->
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <div class="exp-role">Software Programmer</div>
+                            <div class="exp-company">Entelgy Consulting</div>
+                            <div class="exp-meta">Jul 2021 &ndash; Aug 2022 &middot; Spain</div>
+                        </div>
+                        <ul class="exp-list">
+                            <li>Developed <strong>HORUS</strong>, a security orchestration platform for SOC centers, generating cyber intelligence.</li>
+                            <li>Integrated <strong>Keycloak</strong> for user management and documented APIs with <strong>Swagger</strong>.</li>
+                            <li>Built high-volume data processing modules with advanced filtering capabilities.</li>
+                        </ul>
+                        <div class="tags">
+                            <span class="tag">Java 1.8</span>
+                            <span class="tag">Spring</span>
+                            <span class="tag">MySQL</span>
+                            <span class="tag">Keycloak</span>
+                            <span class="tag">Swagger</span>
+                        </div>
+                    </div>
+
+                    <!-- S2 GRUPO -->
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <div class="exp-role">Junior Software Engineer</div>
+                            <div class="exp-company">S2 Grupo Soluciones de Seguridad</div>
+                            <div class="exp-meta">Feb 2021 &ndash; Jul 2021 &middot; Remote</div>
+                        </div>
+                        <ul class="exp-list">
+                            <li>Designed and built the <strong>MVP architecture</strong> for a human risk assessment tool in cybersecurity.</li>
+                            <li>Ensured 80% unit test coverage with JUnit. Worked in <strong>Agile/SCRUM</strong> with direct client collaboration.</li>
+                        </ul>
+                        <div class="tags">
+                            <span class="tag">Java 1.8</span>
+                            <span class="tag">Spring</span>
+                            <span class="tag">MySQL</span>
+                            <span class="tag">JUnit</span>
+                            <span class="tag">SCRUM</span>
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+
+            <!-- RIGHT: SIDEBAR -->
+            <aside class="sidebar">
+
+                <!-- SKILLS -->
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Technical Skills</div>
+
+                    <div class="skill-category">
+                        <div class="skill-category-title">Languages & Core</div>
+                        <ul class="skill-list">
+                            <li>Java (8, 11, 17, 21)</li>
+                            <li>SQL</li>
+                            <li>XML / XSLT</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-category-title">Frameworks</div>
+                        <ul class="skill-list">
+                            <li>Spring Boot</li>
+                            <li>Spring WebFlux</li>
+                            <li>Spring Security</li>
+                            <li>Spring Data / JPA</li>
+                            <li>Project Reactor</li>
+                            <li>MapStruct</li>
+                            <li>QueryDSL</li>
+                            <li>Lombok</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-category-title">Architecture</div>
+                        <ul class="skill-list">
+                            <li>Microservices</li>
+                            <li>RESTful APIs</li>
+                            <li>API-First / OpenAPI</li>
+                            <li>Event-Driven</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-category-title">Databases</div>
+                        <ul class="skill-list">
+                            <li>Oracle</li>
+                            <li>PostgreSQL</li>
+                            <li>MySQL</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-category-title">Messaging</div>
+                        <ul class="skill-list">
+                            <li>Apache Kafka</li>
+                            <li>AWS SQS / SNS</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-category-title">DevOps & Cloud</div>
+                        <ul class="skill-list">
+                            <li>Docker</li>
+                            <li>OpenShift</li>
+                            <li>AWS (ECS, Lambda, S3)</li>
+                            <li>Jenkins</li>
+                            <li>GitLab CI</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-category-title">Testing & Quality</div>
+                        <ul class="skill-list">
+                            <li>JUnit</li>
+                            <li>Mockito</li>
+                            <li>SonarQube</li>
+                            <li>Fortify</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-category-title">Tools</div>
+                        <ul class="skill-list">
+                            <li>Git / GitLab</li>
+                            <li>Maven</li>
+                            <li>Swagger / OpenAPI</li>
+                            <li>Keycloak</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- LANGUAGES -->
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Languages</div>
+
+                    <div class="lang-item">
+                        <span class="lang-name">Portuguese</span>
+                        <span class="lang-level">Native</span>
+                    </div>
+                    <div class="lang-bar"><div class="lang-bar-fill" style="width:100%"></div></div>
+
+                    <div class="lang-item">
+                        <span class="lang-name">Spanish</span>
+                        <span class="lang-level">Fluent</span>
+                    </div>
+                    <div class="lang-bar"><div class="lang-bar-fill" style="width:95%"></div></div>
+
+                    <div class="lang-item">
+                        <span class="lang-name">English</span>
+                        <span class="lang-level">Professional</span>
+                    </div>
+                    <div class="lang-bar"><div class="lang-bar-fill" style="width:80%"></div></div>
+                </div>
+
+                <!-- METHODOLOGY -->
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Methodology</div>
+                    <ul class="skill-list">
+                        <li>Agile / SCRUM</li>
+                        <li>Clean Code</li>
+                        <li>API-First Design</li>
+                        <li>Code Review</li>
+                    </ul>
+                </div>
+
+                <!-- AI -->
+                <div class="sidebar-section">
+                    <div class="ai-badge">
+                        <div class="ai-badge-title">AI-Powered Dev</div>
+                        <p>Experienced in leveraging AI tools (Claude, Copilot) for code analysis, debugging, refactoring and accelerating development workflows.</p>
+                    </div>
+                </div>
+
+            </aside>
+        </div>
+    </div>
+</body>
+</html>
